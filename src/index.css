@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Limelight&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+
+  /* ====================== */
+  /* =====BRAND COLORS===== */
+  /* ====================== */
+  --color-br-text: #fff7f1;
+  --color-br-background: #121212;
+  --color-brand: #caa286;
+  --color-br-secondary: #202020;
+  --color-br-accent: #712222;
+
+  --color-br-text-50: #fff1e5;
+  --color-br-text-100: #ffe2cc;
+  --color-br-text-200: #ffc599;
+  --color-br-text-300: #ffa866;
+  --color-br-text-400: #ff8b33;
+  --color-br-text-500: #ff6e00;
+  --color-br-text-600: #cc5800;
+  --color-br-text-700: #994200;
+  --color-br-text-800: #662c00;
+  --color-br-text-900: #331600;
+  --color-br-text-950: #1a0b00;
+
+  --color-br-background-50: #f2f2f2;
+  --color-br-background-100: #e6e6e6;
+  --color-br-background-200: #cccccc;
+  --color-br-background-300: #b3b3b3;
+  --color-br-background-400: #999999;
+  --color-br-background-500: #808080;
+  --color-br-background-600: #666666;
+  --color-br-background-700: #4d4d4d;
+  --color-br-background-800: #333333;
+  --color-br-background-900: #1a1a1a;
+  --color-br-background-950: #0d0d0d;
+
+  --color-brand-50: #f7f1ed;
+  --color-brand-100: #efe4dc;
+  --color-brand-200: #e0c9b8;
+  --color-brand-300: #d0ae95;
+  --color-brand-400: #c19271;
+  --color-brand-500: #b1774e;
+  --color-brand-600: #8e5f3e;
+  --color-brand-700: #6a482f;
+  --color-brand-800: #47301f;
+  --color-brand-900: #231810;
+  --color-brand-950: #120c08;
+
+  --color-br-secondary-50: #f2f2f2;
+  --color-br-secondary-100: #e6e6e6;
+  --color-br-secondary-200: #cccccc;
+  --color-br-secondary-300: #b3b3b3;
+  --color-br-secondary-400: #999999;
+  --color-br-secondary-500: #808080;
+  --color-br-secondary-600: #666666;
+  --color-br-secondary-700: #4d4d4d;
+  --color-br-secondary-800: #333333;
+  --color-br-secondary-900: #1a1a1a;
+  --color-br-secondary-950: #0d0d0d;
+
+  --color-br-accent-50: #f9ebeb;
+  --color-br-accent-100: #f3d8d8;
+  --color-br-accent-200: #e8b0b0;
+  --color-br-accent-300: #dc8989;
+  --color-br-accent-400: #d06262;
+  --color-br-accent-500: #c43b3b;
+  --color-br-accent-600: #9d2f2f;
+  --color-br-accent-700: #762323;
+  --color-br-accent-800: #4f1717;
+  --color-br-accent-900: #270c0c;
+  --color-br-accent-950: #140606;
+
+  /* ===================== */
+  /* =====BRAND FONTS===== */
+  /* ===================== */
+  --font-accent: "Limelight", sans-serif;
+  --font-title: "Barlow Condensed", sans-serif;
+  --font-default: "Montserrat", sans-serif;
+}
+
+body {
+  @apply bg-br-background text-br-text font-default;
+}
