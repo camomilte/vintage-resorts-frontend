@@ -1,16 +1,60 @@
 import { BiSearch } from 'react-icons/bi';
+import { FaRegUser } from 'react-icons/fa';
+import { FiMenu } from 'react-icons/fi';
 
 export default function Navbar() {
   return (
     <nav>
-      <button className="bg-zinc-800 flex text-zinc-600 rounded-full w-full py-5 justify-center my-4">
-        <div className='flex gap-2 items-center'>
-          <BiSearch /> 
-          <p className='text-base'>Start your search</p>
+      {/* Search bar/button small screen */}
+      <div className='lg:hidden py-4 mx-4 tablet:mx-6'>
+        <button className="bg-zinc-800 flex text-zinc-600 rounded-full w-full py-5 justify-center">
+          <div className='flex gap-2 items-center'>
+            <BiSearch /> 
+            <p className='text-base'>Start your search</p>
+          </div>
+        </button>
+      </div>
+
+      {/* Search bar desktop */}
+      <div className='hidden lg:flex lg:justify-between mx-6 desktop:mx-24 py-4'>
+        <div className='font-accent flex flex-col text-brand text-xl'>
+          <span>Vintage</span>
+          <span>Resorts</span>
         </div>
-      </button>
-      <div className='text-sm border-b border-zinc-800'>
-        <ul className='flex flex-wrap -mb-px justify-between'>
+        <div className='bg-zinc-800 w-2xl rounded-full p-2 flex items-center gap-2'>
+          <div className='flex w-full h-full justify-between text-brand-200 text-base'>
+            <button data-modal-target="static-modal" data-modal-toggle="static modal" className='w-full btn-only rounded-s-full h-full'>
+              Where
+            </button>
+      
+            <button className='w-full border-s btn-only'>
+              When
+            </button>
+
+            <button className='w-full border-s btn-only'>
+              Era
+            </button>
+    
+            <button className='w-full border-s btn-only rounded-e-full'>
+              Who
+            </button>
+          </div>
+          <button className='flex items-center gap-2 btn-primary rounded-full py-3 px-5'>Search<BiSearch /> </button>
+
+        </div>
+        <div className='flex gap-4'>
+          <span className='btn-primary icon-xl'>
+            <FaRegUser className='size-full'/>
+          </span>
+          <span className='btn-secondary icon-xl'>
+            <FiMenu className='size-full'/>
+          </span>
+        </div>
+      </div>
+      
+
+      <div className='text-sm border-b border-zinc-800 lg:mt-3'>
+        <ul className='flex flex-wrap max-w-sm justify-center mx-auto'>
           <li className="me-2">
             <a href="#" className="inline-block pb-2 px-4 text-brand font-bold border-b-4 border-brand active " aria-current="page">Rooms</a>
           </li>
@@ -23,6 +67,8 @@ export default function Navbar() {
           
         </ul>
       </div>
+
+
     </nav>
   )
 };

@@ -78,8 +78,34 @@
   --font-accent: "Limelight", sans-serif;
   --font-title: "Barlow Condensed", sans-serif;
   --font-default: "Montserrat", sans-serif;
+
+  /* ===================== */
+  /* =====BREAKPOINTS===== */
+  /* ===================== */
+  --breakpoint-mobile: 24.5rem;
+  --breakpoint-tablet:48rem;
+  --breakpoint-desktop: 90rem;
 }
 
 body {
   @apply bg-br-background text-br-text font-default;
+}
+
+/* ===================== */
+/* =======BUTTONS======= */
+/* ===================== */
+.icon-xl {
+  @apply size-14 rounded-full inline-flex items-center justify-center p-4
+}
+
+.btn-primary {
+  @apply bg-brand text-br-background hover:bg-brand-200 focus:ring-3 focus:ring-br-text disabled:bg-brand/30 disabled:text-br-background/70
+}
+
+.btn-secondary {
+  @apply bg-transparent border border-brand-200 text-brand-200 hover:bg-brand/30 focus:ring-3 focus:ring-br-text disabled:border-zinc-800 disabled:text-zinc-800
+}
+
+.btn-only {
+  @apply text-brand-200 hover:bg-brand/20 focus:ring-3 focus:ring-brand-200 disabled:text-zinc-600
 }
