@@ -1,6 +1,10 @@
-export interface ListingResponse {
+export interface ListingsResponse {
   data: Listing[]
-}
+};
+
+export interface ListingResponse {
+  data: Listing
+};
 
 
 export interface Listing {
@@ -20,6 +24,6 @@ export interface Listing {
   num_bedrooms: number;
   num_bathrooms: number;
   num_beds: number;
-  created_at: string;
+  created_at: Date;
   pets_allowed: boolean;
 };
