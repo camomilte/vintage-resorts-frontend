@@ -1,9 +1,12 @@
 import ReactDOM from "react-dom/client";
 import { StrictMode } from 'react'
+
 import './index.css'
 import App from './App.tsx'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const root = document.getElementById("root");
+const queryClient = new QueryClient();
 
 if (!root) {
   throw new Error("Root element not found");
@@ -11,7 +14,9 @@ if (!root) {
 
 ReactDOM.createRoot(root).render(
   <StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
   </StrictMode>,
 );
 

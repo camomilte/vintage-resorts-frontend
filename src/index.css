@@ -94,9 +94,26 @@ body {
 /* ===================== */
 /* =======BUTTONS======= */
 /* ===================== */
-.icon-xl {
-  @apply size-14 rounded-full inline-flex items-center justify-center p-4
+.icon-sm {
+  @apply size-10 rounded-full inline-flex items-center justify-center p-2.5
 }
+
+.icon-md { 
+  @apply size-11 rounded-full inline-flex items-center justify-center p-3
+}
+
+.icon-lg {
+  @apply size-13 rounded-full inline-flex items-center justify-center p-3.75
+} 
+
+.icon-xl {
+  @apply size-14 rounded-full inline-flex items-center justify-center p-3.75
+}
+
+.icon-2xl {
+  @apply size-16 rounded-full inline-flex items-center justify-center p-4
+}
+
 
 .btn-primary {
   @apply bg-brand text-br-background hover:bg-brand-200 focus:ring-3 focus:ring-br-text disabled:bg-brand/30 disabled:text-br-background/70
