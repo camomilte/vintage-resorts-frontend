@@ -94,6 +94,8 @@ body {
 /* ===================== */
 /* =======BUTTONS======= */
 /* ===================== */
+
+/* icon */
 .icon-sm {
   @apply size-10 rounded-full inline-flex items-center justify-center p-2.5
 }
@@ -114,7 +116,28 @@ body {
   @apply size-16 rounded-full inline-flex items-center justify-center p-4
 }
 
+/* Regular buttons */
+.btn-sm {
+  @apply text-sm px-[18px] py-2.5 rounded-lg inline-flex items-center justify-center
+}
 
+.btn-md {
+  @apply text-sm px-5 py-3 rounded-lg inline-flex items-center justify-center
+}
+
+.btn-lg {
+  @apply text-base px-[22px] py-3.5 rounded-lg inline-flex items-center justify-center
+}
+
+.btn-xl {
+  @apply text-base px-6 py-4 rounded-lg inline-flex items-center justify-center
+}
+
+.btn-2xl {
+  @apply text-lg px-[26px] py-[18px] rounded-lg inline-flex items-center justify-center
+}
+
+/* Button styles */
 .btn-primary {
   @apply bg-brand text-br-background hover:bg-brand-200 focus:ring-3 focus:ring-br-text disabled:bg-brand/30 disabled:text-br-background/70
 }
