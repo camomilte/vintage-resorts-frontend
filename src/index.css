@@ -142,6 +142,10 @@ body {
   @apply bg-brand text-br-background hover:bg-brand-200 focus:ring-3 focus:ring-br-text disabled:bg-brand/30 disabled:text-br-background/70
 }
 
+.btn-light-primary {
+  @apply bg-brand-800 text-br-text hover:bg-brand-600 focus:ring-3 focus:ring-br-text disabled:bg-brand-800/30 disabled:text-brand
+}
+
 .btn-secondary {
   @apply bg-transparent border border-brand-200 text-brand-200 hover:bg-brand/30 focus:ring-3 focus:ring-br-text disabled:border-zinc-800 disabled:text-zinc-800
 }

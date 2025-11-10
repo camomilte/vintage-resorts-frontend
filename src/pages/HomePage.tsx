@@ -3,7 +3,6 @@ import { ListingGroup } from '../features/listings/components/ListingGroup';
 
 function Home() {
  
-
   return (
     <>
       <div className="my-4">

@@ -67,7 +67,7 @@ export default function Navbar() {
           
         </ul>
       </div>
-
+npm install @hugeicons-pro/core-stroke-rounded
 
     </nav>
   )
