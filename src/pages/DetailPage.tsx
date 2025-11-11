@@ -6,6 +6,7 @@ import { FaRegHeart, FaArrowLeft, FaKitchenSet } from "react-icons/fa6";
 import { IoShareSocialOutline, IoPaw } from "react-icons/io5";
 import { PiWashingMachine, PiHairDryer } from "react-icons/pi";
 import { useEffect, useRef, useState } from "react";
+import { BookingCard } from "../features/booking/components/BookingCard.tsx";
 
 function ListingDetail() {
   const { listing_id } = useParams<{ listing_id: string }>();
@@ -100,7 +101,7 @@ function ListingDetail() {
             </div>
           </div>
           
-          <div className="px-4 my-7 flex flex-col gap-4 lg:col-start-1 lg:col-end-3 lg:row-start-2 lg:row-end-3 lg:px-0">
+          <div className="px-4 my-7 flex flex-col gap-4 lg:col-start-1 lg:col-end-3 lg:row-start-2 lg:row-end-3 lg:px-0 lg:pe-5">
             <h2 className="font-title text-brand text-3xl lg:text-5xl font-semibold">About this place</h2>
             <p className={`text-base ${isOpen ? 'line-clamp-none' : 'line-clamp-4'}`} ref={ref}>{listing.description}</p>
             { showButton && (
@@ -110,18 +111,8 @@ function ListingDetail() {
             )}
           </div>
           
-          <div className="lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-3">
-            <div className="mx-4 my-7 bg-brand rounded-2xl p-4 flex flex-col gap-4">
-              <h4 className="font-title text-br-background text-2xl font-semibold lg:text-4xl">Book your stay</h4>
-              <button className="w-full bg-brand-200 text-start rounded-lg p-2.5 text-brand-800/40">Check in</button>
-              <button className="w-full bg-brand-200 text-start rounded-lg p-2.5 text-brand-800/40">Check out</button>
-              <button className="w-full bg-brand-200 text-start rounded-lg p-2.5 text-brand-800/40">Guests</button>
-              
-              <a href="#">
-                <span className="btn-light-primary btn-md w-full">Start reservation</span>
-              </a>
-            </div>
-
+          <div className="px-4 lg:px-0 lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-3">
+            <BookingCard />
           </div>
           
           <div className="px-4 my-7 lg:px-0 lg:col-span-3">
@@ -155,8 +146,13 @@ function ListingDetail() {
             <button className="btn-md btn-primary w-full lg:w-auto" disabled>Show all features</button>
           </div>
         </div>
+        <div>
+          Date picker will go here
+        </div>
+        <div>
+          Map will go here
+        </div>
       </div>
-        
         
     </div>
   )

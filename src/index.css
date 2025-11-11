@@ -153,3 +153,14 @@ body {
 .btn-only {
   @apply text-brand-200 hover:bg-brand/20 focus:ring-3 focus:ring-brand-200 disabled:text-zinc-600
 }
+
+/* ===================== */
+/* ======DAYPICKER====== */
+/* ===================== */
+.rdp-root {
+  --rdp-accent-color: var(--color-brand);
+  --rdp-today-color: var(--color-brand);
+  --rdp-weekday-opacity: 30%;
+  
+
+}

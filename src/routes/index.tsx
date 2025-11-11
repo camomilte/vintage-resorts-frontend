@@ -4,6 +4,7 @@ import RootLayout from "../layouts/RootLayout";
 import Home from "../pages/HomePage";
 import ListingDetail from "../pages/DetailPage";
 import { DetailLayout } from "../layouts/DetailLayout";
+import "react-day-picker/style.css";
 
 export const router = createBrowserRouter([
   {

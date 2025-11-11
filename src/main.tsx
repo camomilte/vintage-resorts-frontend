@@ -1,6 +1,7 @@
 import ReactDOM from "react-dom/client";
 import { StrictMode } from 'react'
 
+import "react-day-picker/style.css";
 import './index.css'
 import App from './App.tsx'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
