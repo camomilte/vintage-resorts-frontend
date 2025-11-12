@@ -103,9 +103,9 @@ function ListingDetail() {
           
           <div className="px-4 my-7 flex flex-col gap-4 lg:col-start-1 lg:col-end-3 lg:row-start-2 lg:row-end-3 lg:px-0 lg:pe-5">
             <h2 className="font-title text-brand text-3xl lg:text-5xl font-semibold">About this place</h2>
-            <p className={`text-base ${isOpen ? 'line-clamp-none' : 'line-clamp-4'}`} ref={ref}>{listing.description}</p>
+            <p className={`text-base max-w-4xl ${isOpen ? 'line-clamp-none' : 'line-clamp-4'}`} ref={ref}>{listing.description}</p>
             { showButton && (
-              <button onClick={() => setIsOpen(!isOpen)} className="btn-primary btn-md w-full">
+              <button onClick={() => setIsOpen(!isOpen)} className="btn-primary btn-md w-full lg:w-fit">
                 {isOpen ? 'Hide' : 'Show more'}
               </button> 
             )}
