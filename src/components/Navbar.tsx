@@ -21,9 +21,9 @@ export default function Navbar() {
           <span>Vintage</span>
           <span>Resorts</span>
         </div>
-        <div className='bg-zinc-800 w-2xl rounded-full p-2 flex items-center gap-2'>
-          <div className='flex w-full h-full justify-between text-brand-200 text-base'>
-            <button data-modal-target="static-modal" data-modal-toggle="static modal" className='w-full btn-only rounded-s-full h-full'>
+        <div className='bg-zinc-800 w-2xl rounded-full p-2 flex items-center gap-2 h-fit'>
+          <div className='flex w-full h-full justify-between text-brand-200 text-sm'>
+            <button className='w-full btn-only rounded-s-full h-full'>
               Where
             </button>
       
@@ -39,14 +39,14 @@ export default function Navbar() {
               Who
             </button>
           </div>
-          <button className='flex items-center gap-2 btn-primary rounded-full py-3 px-5'>Search<BiSearch /> </button>
+          <button className='flex items-center gap-2 btn-primary rounded-full py-2 px-5 text-sm'>Search<BiSearch /> </button>
 
         </div>
         <div className='flex gap-4'>
-          <span className='btn-primary icon-xl'>
+          <span className='btn-primary icon-md'>
             <FaRegUser className='size-full'/>
           </span>
-          <span className='btn-secondary icon-xl'>
+          <span className='btn-secondary icon-md'>
             <FiMenu className='size-full'/>
           </span>
         </div>
@@ -67,7 +67,6 @@ export default function Navbar() {
           
         </ul>
       </div>
-npm install @hugeicons-pro/core-stroke-rounded
 
     </nav>
   )

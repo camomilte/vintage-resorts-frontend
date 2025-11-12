@@ -3,8 +3,10 @@ import { createBrowserRouter } from "react-router";
 import RootLayout from "../layouts/RootLayout";
 import Home from "../pages/HomePage";
 import ListingDetail from "../pages/DetailPage";
-import { DetailLayout } from "../layouts/DetailLayout";
-import "react-day-picker/style.css";
+import { DetailLayout } from "../layouts/DetailBookingLayout";
+import { AuthLayout } from "../layouts/AuthLayout";
+import Login from "../pages/LoginPage";
+
 
 export const router = createBrowserRouter([
   {
@@ -15,9 +17,15 @@ export const router = createBrowserRouter([
     ]
   },
   {
+    element: <AuthLayout />,
+    children: [
+      { path: "/auth/login", element: <Login />}
+    ]
+  },
+  {
     element: <DetailLayout />,
     children: [
-      { path: "listings/:listing_id", element: <ListingDetail /> }
+      { path: "listings/:listing_id", element: <ListingDetail /> },
     ]
   }
 
