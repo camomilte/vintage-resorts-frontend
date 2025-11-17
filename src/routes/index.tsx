@@ -6,6 +6,8 @@ import ListingDetail from "../pages/DetailPage";
 import { DetailLayout } from "../layouts/DetailBookingLayout";
 import { AuthLayout } from "../layouts/AuthLayout";
 import Login from "../pages/LoginPage";
+import NotFound from "../pages/NotFoundPage";
+import Register from "../pages/RegisterPage";
 
 
 export const router = createBrowserRouter([
@@ -19,7 +21,8 @@ export const router = createBrowserRouter([
   {
     element: <AuthLayout />,
     children: [
-      { path: "/auth/login", element: <Login />}
+      { path: "/auth/login", element: <Login /> },
+      { path: "/auth/register", element: <Register /> }
     ]
   },
   {
@@ -27,6 +30,9 @@ export const router = createBrowserRouter([
     children: [
       { path: "listings/:listing_id", element: <ListingDetail /> },
     ]
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   }
-
 ])
