@@ -5,8 +5,6 @@ import { useUser } from "../features/user/hooks/useUser";
 export const StickyNav = () => {
   const { data } = useUser();
 
-  console.log(data)
-
   return (
     <nav className="bg-br-background w-full px-4 fixed bottom-0 end-0 z-20 border-t border-zinc-800 lg:hidden">
       <div className="max-w-60 mx-auto py-4">

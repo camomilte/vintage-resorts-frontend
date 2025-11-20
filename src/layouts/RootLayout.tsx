@@ -4,7 +4,6 @@ import Footer from "../components/Footer";
 import { StickyNav } from "../components/StickyNav";
 
 export default function RootLayout() {
-  
 
   return (
     <>

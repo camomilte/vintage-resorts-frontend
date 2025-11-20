@@ -3,10 +3,10 @@ import placeholder from '../../../assets/stock-apartment.jpg';
 import type { Listing } from '../types';
 import { IoPaw } from 'react-icons/io5';
 
-  interface ListingCardProps {
-    listing: Listing;
-  }
-  
+interface ListingCardProps {
+  listing: Listing;
+}
+
 
 export const ListingCard = ({ listing }: ListingCardProps) => {
   const navigate = useNavigate();

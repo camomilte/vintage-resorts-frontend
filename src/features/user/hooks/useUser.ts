@@ -10,6 +10,7 @@ export const useUser = () => {
   return useQuery<User>({
     queryKey:["user"],
     queryFn: () => getCurrentUser(token!),
-    enabled: !!token
+    enabled: !!token,
+    retry: false
   });
 };

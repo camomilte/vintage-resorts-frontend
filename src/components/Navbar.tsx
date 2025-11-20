@@ -1,8 +1,12 @@
 import { BiSearch } from 'react-icons/bi';
 import { FaRegUser } from 'react-icons/fa';
 import { FiMenu } from 'react-icons/fi';
+import { useUser } from '../features/user/hooks/useUser';
 
 export default function Navbar() {
+  // Get user
+  const { data } = useUser();
+
   return (
     <nav>
       {/* Search bar/button small screen */}
@@ -43,9 +47,16 @@ export default function Navbar() {
 
         </div>
         <div className='flex gap-4'>
-          <span className='btn-primary icon-md'>
-            <FaRegUser className='size-full'/>
-          </span>
+          <a href={data ? "/profile" : "/auth/login"}>
+            {data?.profile_picture_url ? (
+              <img src={data.profile_picture_url} alt="user profile image" className='size-11 rounded-full border-2 border-brand'/>
+            ) : (
+              <span className='btn-primary icon-md'>
+                <FaRegUser className='size-full'/>
+              </span>
+            )}
+          
+          </a>
           <span className='btn-secondary icon-md'>
             <FiMenu className='size-full'/>
           </span>

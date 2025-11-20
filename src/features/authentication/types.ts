@@ -1,17 +1,3 @@
-export interface User {
-  user_id: number;
-  firstname: string;
-  lastname: string;
-  email: string;
-  password: string;
-  phone: string;
-  bio: string | null;
-  profilePicture: string | null;
-  reviews: any[] | null;
-  created_at: Date;
-  role: string;
-  birthday: Date;
-}
 
 export interface RegisterData {
   first_name: string;
@@ -23,8 +9,6 @@ export interface RegisterData {
   profile_picture_url: string | null;
   date_of_birth: Date;
 }
-
-
 
 export interface LoginData {
   email: string;
