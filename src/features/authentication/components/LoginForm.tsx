@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
 import { useNavigate } from "react-router";
+import { number } from "zod";
 
 //TODO: add error message if email password is incorrect
 
@@ -24,7 +25,7 @@ export const LoginForm = () => {
         // Log for debugging
         console.log("User logged in", data);
         // Save token to localStorage
-        localStorage.setItem("token", data.token); 
+        localStorage.setItem("token", data.token);
         // Redirect user to homepage
         navigate("/");
 

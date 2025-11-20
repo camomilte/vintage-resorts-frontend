@@ -8,3 +8,19 @@ export const api: AxiosInstance = axios.create({
     "Content-Type": "application/json"
   }
 });
+
+api.interceptors.response.use(
+  // Run on successfull response
+  res => res,
+
+  // Run in case of error
+  err => {
+    // If error status is a 401
+    if(err.response?.status === 401) {
+      // Remove token fromm localStorage
+      localStorage.removeItem("token");
+    }
+    // Reject promise
+    return Promise.reject(err)
+  }
+)
