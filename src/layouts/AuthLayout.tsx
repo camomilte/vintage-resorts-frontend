@@ -11,6 +11,5 @@ export const AuthLayout = () => {
       </main>
       <StickyNav />
     </>
-
   )
 }

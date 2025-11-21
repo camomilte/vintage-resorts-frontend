@@ -124,6 +124,9 @@ body {
 }
 
 /* Regular buttons */
+.btn-xs {
+  @apply text-sm px-4 h-10 rounded-lg inline-flex items-center justify-center
+}
 .btn-sm {
   @apply text-sm px-[18px] py-2.5 rounded-lg inline-flex items-center justify-center
 }

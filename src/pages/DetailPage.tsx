@@ -6,7 +6,9 @@ import { FaRegHeart, FaArrowLeft, FaKitchenSet } from "react-icons/fa6";
 import { IoShareSocialOutline, IoPaw } from "react-icons/io5";
 import { PiWashingMachine, PiHairDryer } from "react-icons/pi";
 import { useEffect, useRef, useState } from "react";
-import { BookingCard } from "../features/booking/components/BookingCard.tsx";
+import { BookingCard } from "../features/reservation/components/ReservationCard.tsx";
+
+//TODO: add map
 
 function ListingDetail() {
   const { listing_id } = useParams<{ listing_id: string }>();
@@ -145,9 +147,6 @@ function ListingDetail() {
             </div>
             <button className="btn-md btn-primary w-full lg:w-auto" disabled>Show all features</button>
           </div>
-        </div>
-        <div>
-          Date picker will go here
         </div>
         <div>
           Map will go here

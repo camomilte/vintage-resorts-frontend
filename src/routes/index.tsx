@@ -8,6 +8,7 @@ import { AuthLayout } from "../layouts/AuthLayout";
 import Login from "../pages/LoginPage";
 import NotFound from "../pages/NotFoundPage";
 import Register from "../pages/RegisterPage";
+import Reservation from "../pages/ReservationPage";
 
 
 export const router = createBrowserRouter([
@@ -29,6 +30,7 @@ export const router = createBrowserRouter([
     element: <DetailLayout />,
     children: [
       { path: "listings/:listing_id", element: <ListingDetail /> },
+      { path: "/listings/:listing_id/reservations/new", element: <Reservation />}
     ]
   },
   {

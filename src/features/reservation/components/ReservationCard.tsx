@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Modal } from "../../../components/Modal";
 import { DayPicker } from "react-day-picker";
 import { FaMinus, FaPlus } from "react-icons/fa6";
+import { useNavigate } from "react-router";
 
 //TODO: Check so start day cannot be before today and end day cannot be before start day
 
@@ -9,6 +10,9 @@ import { FaMinus, FaPlus } from "react-icons/fa6";
 
 
 export const BookingCard = () => {
+  // Initialize navigate
+  const navigate = useNavigate();
+
   const [checkInModalOpen, setCheckInModalOpen] = useState(false);
   const [checkIn, setCheckIn] = useState<Date | undefined>(undefined);
 
@@ -156,10 +160,20 @@ export const BookingCard = () => {
             })}
           </form>
         </Modal>
-        
-        <a href="#">
-          <span className="btn-light-primary btn-md w-full">Start reservation</span>
-        </a>
+
+        <button 
+          className="btn-light-primary btn-md w-full"
+          onClick={() => 
+            navigate("reservations/new", {
+              state: {
+                checkIn,
+                checkOut,
+                guests: guestsCounters
+              },
+            })
+          }>
+          Start reservation
+        </button>
       </div>
     </div>
   )
