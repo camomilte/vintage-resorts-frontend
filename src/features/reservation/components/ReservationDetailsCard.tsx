@@ -2,29 +2,68 @@ import { useListing } from "../../listings/hooks/useListing";
 import placeholder from '../../../assets/stock-apartment.jpg'
 import { useLocation, useNavigate } from "react-router";
 import { calculateTotalPrice } from "../../../utils/calculateTotalPrice";
-import { useEffect } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 interface Props {
   listing_id: string;
+  onChange: any
 }
 
-export const ReservationDetailsCard = ({listing_id}: Props) => {
+export const ReservationDetailsCard = ({ listing_id, onChange }: Props) => {
+  // Get reservation state from reservation card
+  const { state } = useLocation();
+
   // Fetch listing and convert id to number
   const { data: listing, isPending, isError, error } = useListing(Number(listing_id));
 
   // Initialize navigate
   const navigate = useNavigate();
-  
-  // Get reservation state from reservation card
-  const { state } = useLocation();
 
-  // Redirect to not found if listing is mmissing
+  // Get checkIn and checkOut date and convert to Date objects
+  const checkIn = state?.checkIn ? new Date(state.checkIn) : undefined;
+  const checkOut = state?.checkOut ? new Date(state.checkOut) : undefined;
+  // Extract guests from state 
+  const numAdults = state?.guests?.adults.value ?? 0;
+  const numChildren = state?.guests?.children.value ?? 0;
+  const numInfants = state?.guests?.infants.value ?? 0;
+  const numPets = state?.guests?.pets.value ?? 0;
+  
+  // Call function to calculate total price
+  const totalPrice = checkIn && checkOut ? calculateTotalPrice(checkIn, checkOut, listing?.price_per_night) : 0;
+  
+  // Redirect to not found if listing is missing
   useEffect(() => {
     if (!isPending && !listing) {
       navigate("/not-found");
     }
   }, [isPending, listing, navigate]);
+  
+  const reservation = useMemo (() => {
+    if (!listing) return null;
 
+    return {
+      listing_id,
+      start_date: checkIn,
+      end_date: checkOut,
+      num_adults: numAdults,
+      num_childern: numChildren,
+      num_infants: numInfants,
+      num_pets: numPets,
+      total_price: totalPrice
+    }
+  }, [listing_id, listing, checkIn, checkOut, numAdults, numChildren, numInfants, numPets, totalPrice]);
+
+  const prevReservation = useRef(reservation);
+  useEffect(() => {
+    if(!reservation) return;
+    if(JSON.stringify(reservation) === JSON.stringify(prevReservation.current)) return;
+
+    prevReservation.current = reservation;
+
+    onChange(reservation)
+
+  }, [reservation, onChange]);
+  
   // Show loading when fetching
   if (isPending) {
     return <p>Loading...</p>
@@ -34,15 +73,6 @@ export const ReservationDetailsCard = ({listing_id}: Props) => {
   if (isError) {
     console.error(error)
   }
-
-  // Get checkIn and checkOut date and convert to Date objects
-  const checkIn = state?.checkIn ? new Date(state.checkIn) : undefined;
-  const checkOut = state?.checkOut ? new Date(state.checkOut) : undefined;
-  // Extract guests from state 
-  const guests = state?.guests;
-  
-  // Call function to calculate total price
-  const totalPrice = checkIn && checkOut ? calculateTotalPrice(checkIn, checkOut, listing?.price_per_night) : 0;
 
   return (
     <div className="border border-zinc-800 rounded-2xl p-4">
@@ -74,20 +104,20 @@ export const ReservationDetailsCard = ({listing_id}: Props) => {
       <div className="flex justify-between items-center py-4 border-b border-zinc-800">
         <div>
           <h3 className="uppercase font-bold">Guests</h3>
-          {guests?.adults.value > 0 &&(
-            <p className="text-neutral-500">{guests.adults.value} adults</p>
+          {numAdults > 0 &&(
+            <p className="text-neutral-500">{numAdults} adults</p>
           )}
-          {guests?.children.value > 0 && (
-            <p className="text-neutral-500">{guests.children.value} children</p>
+          {numChildren > 0 && (
+            <p className="text-neutral-500">{numChildren} children</p>
           )}
-          {guests?.infants.value > 0 && (
-            <p className="text-neutral-500">{guests.infants.value} infants</p>
+          {numInfants > 0 && (
+            <p className="text-neutral-500">{numInfants} infants</p>
           )}
-          {guests?.pets.value > 0 && (
-            <p className="text-neutral-500">{guests.pets.value} pets</p>
+          {numPets > 0 && (
+            <p className="text-neutral-500">{numPets.value} pets</p>
           )}
         </div>
-        <button className="btn-primary btn-xs">{guests? "Change" : "Select"}</button>
+        <button className="btn-primary btn-xs">{numAdults? "Change" : "Select"}</button>
 
       </div>
 

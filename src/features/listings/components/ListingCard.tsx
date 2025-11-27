@@ -17,10 +17,16 @@ export const ListingCard = ({ listing }: ListingCardProps) => {
 
   return (
     <div onClick={handleClick} className='min-w-40 desktop:min-w-sm cursor-pointer'>
-      <img src={placeholder} alt="listing image" className='rounded-lg'/>
+      {listing.images? (
+        <img src={listing.images[0]} alt="listing image" className='rounded-lg object-cover w-full h-30'/>
+      ) : (
+        <img src={placeholder} alt="listing image" className='rounded-lg object-cover w-full h-30'/>
+      )
+
+      }
     
       <div className='py-3'>
-        <h3 className='font-bold text-base pb-1 desktop:text-xl'>{listing.title}</h3>
+        <h3 className='font-bold text-base pb-1 desktop:text-xl capitalize'>{listing.title}</h3>
         <div className='flex flex-col text-xs desktop:text-base text-neutral-400 gap-1'>
           <span>Located in {listing.country}</span>
           <span>{listing.price_per_night} SEK per night</span>

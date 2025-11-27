@@ -26,4 +26,5 @@ export interface Listing {
   num_beds: number;
   created_at: Date;
   pets_allowed: boolean;
+  images: string[] | null;
 };

@@ -11,7 +11,7 @@ function Home() {
         <section>
           <div className='my-2 mx-4'>
             <a href="/" className='flex items-baseline gap-2'>
-              <h2 className="font-title text-2xl desktop:text-4xl">Specific Era</h2>
+              <h2 className="font-title text-2xl desktop:text-4xl">Recomended</h2>
               <FaChevronRight className='size-5 desktop:size-6'/>
             </a>
           </div>
@@ -20,7 +20,7 @@ function Home() {
         <section>
           <div className='my-2 mx-4'>
             <a href="/" className='flex items-baseline gap-2'>
-              <h2 className="font-title text-2xl desktop:text-4xl">Specific Era</h2>
+              <h2 className="font-title text-2xl desktop:text-4xl capitalize">Sleep like it's the 18th century</h2>
               <FaChevronRight className='size-5 desktop:size-6'/>
             </a>
           </div>
@@ -29,7 +29,7 @@ function Home() {
         <section>
           <div className='my-2 mx-4'>
             <a href="/" className='flex items-baseline gap-2'>
-              <h2 className="font-title text-2xl desktop:text-4xl">Specific Era</h2>
+              <h2 className="font-title text-2xl desktop:text-4xl capitalize">Apartments in Great Brittain</h2>
               <FaChevronRight className='size-5 desktop:size-6'/>
             </a>
           </div>
