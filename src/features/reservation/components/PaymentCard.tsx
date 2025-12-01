@@ -4,8 +4,8 @@ import SwishLogo from "../../../assets/swish-icon.svg"
 import { useState } from "react"
 
 export const PaymentCard = () => {
-  // State to hold selected payment method with debit as default value
-  const [selectedPayment, setSelectedPayment] = useState<string>("debit");
+  // State to hold selected payment method with Debit as default value
+  const [selectedPayment, setSelectedPayment] = useState<string>("Debit");
 
   // Function to handle selection
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,13 +18,13 @@ export const PaymentCard = () => {
       <div className="relative flex justify-between border-b border-zinc-800 pb-6">
         <div className="flex gap-2 items-center">
           <FaCcMastercard className="size-5"/>
-          <label htmlFor="debit">Pay with Debit</label>
+          <label htmlFor="Debit">Pay with Debit</label>
         </div>
         <div className="relative">
           <input 
-            id="debit" 
+            id="Debit" 
             type="radio"
-            checked={selectedPayment === "debit"}
+            checked={selectedPayment === "Debit"}
             onChange={handleChange}
           />
         </div>
@@ -34,48 +34,48 @@ export const PaymentCard = () => {
       <div className="flex justify-between border-b border-zinc-800 py-6">
         <div className="flex gap-2 items-center">
           <FaCcPaypal className="size-5"/>
-          <label htmlFor="paypal">Pay with PayPal</label>
+          <label htmlFor="PayPal">Pay with PayPal</label>
         </div>
         <input 
-          id="paypal" 
+          id="PayPal" 
           type="radio"
-          checked={selectedPayment === "paypal"}
+          checked={selectedPayment === "PayPal"}
           onChange={handleChange} />
       </div>
 
       <div className="flex justify-between border-b border-zinc-800 py-6">
         <div className="flex gap-2 items-center">
-          <img src={SwishLogo} alt="swish logo" className="size-5"/>
-          <label htmlFor="swish">Pay with Swish</label>
+          <img src={SwishLogo} alt="Swish logo" className="size-5"/>
+          <label htmlFor="Swish">Pay with Swish</label>
         </div>
          <input 
-          id="swish" 
+          id="Swish" 
           type="radio" 
-          checked={selectedPayment === "swish"}
+          checked={selectedPayment === "Swish"}
           onChange={handleChange}/>
       </div>
 
       <div className="flex justify-between border-b border-zinc-800 py-6">
         <div className="flex gap-2 items-center">
           <FaGooglePay className="size-5"/>
-          <label htmlFor="google_pay">Pay with Google Pay</label>
+          <label htmlFor="Google_Pay">Pay with Google Pay</label>
         </div>
         <input 
-          id="google_pay" 
+          id="Google_Pay" 
           type="radio" 
-          checked={selectedPayment === "google_pay"}
+          checked={selectedPayment === "Google_Pay"}
           onChange={handleChange}/>
       </div>
 
       <div className="flex justify-between pt-6">
         <div className="flex gap-2 items-center">
           <SiKlarna className="size-5"/>
-          <label htmlFor="klarna">Pay with Klarna</label>
+          <label htmlFor="Klarna">Pay with Klarna</label>
         </div>
          <input 
-          id="klarna" 
+          id="Klarna" 
           type="radio"
-          checked={selectedPayment === "klarna"}
+          checked={selectedPayment === "Klarna"}
           onChange={handleChange} />
       </div>
     </div>

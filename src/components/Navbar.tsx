@@ -2,6 +2,7 @@ import { BiSearch } from 'react-icons/bi';
 import { FaRegUser } from 'react-icons/fa';
 import { FiMenu } from 'react-icons/fi';
 import { useUser } from '../features/user/hooks/useUser';
+import SearchModal from '../features/listings/components/SearchModal';
 
 export default function Navbar() {
   // Get user
@@ -11,12 +12,7 @@ export default function Navbar() {
     <nav>
       {/* Search bar/button small screen */}
       <div className='lg:hidden py-4 mx-4 tablet:mx-6'>
-        <button className="bg-zinc-800 flex text-zinc-600 rounded-full w-full py-5 justify-center">
-          <div className='flex gap-2 items-center'>
-            <BiSearch /> 
-            <p className='text-base'>Start your search</p>
-          </div>
-        </button>
+        <SearchModal />
       </div>
 
       {/* Search bar desktop */}

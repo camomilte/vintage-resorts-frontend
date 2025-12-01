@@ -16,9 +16,9 @@ export const ListingCard = ({ listing }: ListingCardProps) => {
   }
 
   return (
-    <div onClick={handleClick} className='min-w-40 desktop:min-w-sm cursor-pointer'>
+    <div onClick={handleClick} className='min-w-40 lg:min-w-55 desktop:min-w-sm cursor-pointer'>
       {listing.images? (
-        <img src={listing.images[0]} alt="listing image" className='rounded-lg object-cover w-full h-30'/>
+        <img src={listing.images[0]} alt="listing image" className='rounded-lg object-cover w-full h-30 lg:h-40 desktop:h-64'/>
       ) : (
         <img src={placeholder} alt="listing image" className='rounded-lg object-cover w-full h-30'/>
       )
