@@ -12,13 +12,15 @@ export const Modal = ({ open, onClose, children }: ModalProps) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-end justify-center z-50 lg:items-center">
-      <div className="bg-br-secondary w-full min-h-19/20 rounded-t-3xl p-4 relative lg:max-w-lg lg:min-h-auto lg:rounded-3xl">
+      <div className="bg-br-secondary w-full max-h-[95vh] rounded-t-3xl p-4 relative lg:max-w-lg lg:min-h-auto lg:rounded-3xl flex flex-col">
         <div className="w-full flex justify-end">
           <button onClick={onClose} className="btn-secondary icon-sm">
             <IoClose className="size-full"/>
           </button>
         </div>
-        {children}
+        <div className="overflow-y-auto">
+          {children}
+        </div>
       </div>
 
     </div>

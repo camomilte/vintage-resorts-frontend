@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { Listing } from "../types";
+import type { Listing } from "../types/listingTypes";
 import { getListingById } from "../services/getListingById";
 
 export const useListing = (listing_id: number) => {

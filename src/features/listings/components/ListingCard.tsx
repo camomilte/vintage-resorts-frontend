@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router';
 import placeholder from '../../../assets/stock-apartment.jpg';
-import type { Listing } from '../types';
+import type { Listing } from '../types/listingTypes';
 import { IoPaw } from 'react-icons/io5';
 
 interface ListingCardProps {

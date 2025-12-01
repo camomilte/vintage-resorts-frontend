@@ -9,7 +9,6 @@ export const ListingGroup = () => {
   if (isError) {
     return <span>Error: {error.message}</span>
   }
-  console.log("data:", data);
 
   return (
     <div className="flex gap-4 overflow-scroll ms-4 my-4 m">    
