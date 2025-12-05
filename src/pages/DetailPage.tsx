@@ -1,10 +1,9 @@
 import { useParams } from "react-router";
 import placeholder from '../assets/stock-apartment.jpg'
-import { useListing } from "../features/listings/hooks/useListing.ts";
-import { FaStar, FaWifi, FaTv } from 'react-icons/fa';
+import { useListinAmenities, useListing } from "../features/listings/hooks/useListing.ts";
+import { FaStar } from 'react-icons/fa';
 import { FaRegHeart, FaArrowLeft, FaKitchenSet } from "react-icons/fa6";
-import { IoShareSocialOutline, IoPaw } from "react-icons/io5";
-import { PiWashingMachine, PiHairDryer } from "react-icons/pi";
+import { IoShareSocialOutline } from "react-icons/io5";
 import { useEffect, useRef, useState } from "react";
 import { BookingCard } from "../features/reservation/components/ReservationCard.tsx";
 
@@ -14,10 +13,21 @@ function ListingDetail() {
   const { listing_id } = useParams<{ listing_id: string }>();
   const listingId = Number(listing_id);
   const { data: listing, isLoading, isError, error } = useListing(listingId);
+  const { data: amenities } = useListinAmenities(listingId);
 
   const ref = useRef<HTMLParagraphElement>(null)
   const [isOpen, setIsOpen] = useState(false);
   const [showButton, setShowButton] = useState(false);
+
+  // Filter out era from amenities
+  const filtered = amenities?.filter(
+    amenity => amenity.description !== 'Era'
+  );
+
+  // Keep only era from amenity array
+  const eras = amenities?.filter(
+    amenity => amenity.description === 'Era'
+  ) ?? [];
 
   useEffect(() => {
     if (ref.current) {
@@ -30,7 +40,6 @@ function ListingDetail() {
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <span>Error: {error.message}</span>;
   if (!listing) return null;
-
 
 
 
@@ -66,7 +75,11 @@ function ListingDetail() {
         <h1 className="font-accent text-5xl hidden lg:block py-7">{listing.title}</h1>
 
         <div className="h-[400px] w-full">
-          <img src={placeholder} alt="apartment image" className="size-full object-cover lg:rounded-2xl"/>
+          {listing.images? (
+            <img src={listing.images[0]} alt="apartment image" className="size-full object-cover lg:rounded-2xl"/>
+          ) : (
+            <img src={placeholder} alt="listing image" className='rounded-lg object-cover w-full h-30'/>
+          )}
         </div>
 
         <div className="rounded-t-3xl bg-br-background -mt-10 relative lg:mt-0 lg:grid lg:grid-cols-3 lg:grid-rows-[auto, 1fr]">
@@ -82,8 +95,8 @@ function ListingDetail() {
               <div className="flex w-full border-e border-brand px-2 items-center justify-center">
                 <i className="hgi hgi-stroke hgi-laurel-wreath-left-01 text-4xl text-brand"></i>
                   <div className="flex flex-col text-center">
-                    <span>Guest</span>
-                    <span>Favorite</span>
+                    <span className="font-bold text-brand">Era</span>
+                    <span>{eras[0].amenity_name}</span>
                   </div>
                 <i className="hgi hgi-stroke hgi-laurel-wreath-right-01 text-4xl text-brand"></i>
               </div>
@@ -118,38 +131,17 @@ function ListingDetail() {
           </div>
           
           <div className="px-4 my-7 lg:px-0 lg:col-span-3">
-            <h3 className="font-title text-brand font-semibold text-3xl lg:text-5xl">What this place offers</h3>
+            <h2 className="font-title text-brand font-semibold text-3xl lg:text-5xl">What this place offers</h2>
             <div className="grid grid-col-1 gap-4 my-4 lg:grid-cols-2 lg:grid-flow-col">
-              <div className="flex items-center gap-4 lg:col-1">
-                <FaWifi className="text-brand size-8"/>
-                <span>Wifi</span>
-              </div>
-              <div className="flex items-center gap-4 lg:col-1">
-                <FaKitchenSet className="text-brand size-8"/>
-                <span>Kitchen</span>
-              </div>
-              <div className="flex items-center gap-4 lg:col-1">
-                <IoPaw className="text-brand size-8"/>
-                <span>Pets allowed</span>
-              </div>
-              <div className="flex items-center gap-4 lg:col-2">
-                <PiWashingMachine className="text-brand size-8"/>
-                <span>Washing machine</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <PiHairDryer className="text-brand size-8"/>
-                <span>Hair dryer</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <FaTv className="text-brand size-8"/>
-                <span>TV</span>
-              </div>
+              {filtered?.map((amenity) => (
+                <div key={amenity.amenity_id} className="flex items-center gap-4 lg:col-1">
+                  <FaKitchenSet className="text-brand size-8"/>
+                  <span>{amenity.amenity_name}</span>
+                </div>
+              ))
+              }
             </div>
-            <button className="btn-md btn-primary w-full lg:w-auto" disabled>Show all features</button>
           </div>
-        </div>
-        <div>
-          Map will go here
         </div>
       </div>
         

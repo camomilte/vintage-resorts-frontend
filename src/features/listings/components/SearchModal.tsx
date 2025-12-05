@@ -7,7 +7,7 @@ import { useEras } from "../hooks/useEras";
 import { useAmenities } from "../hooks/useAmenities";
 import { useLocations } from "../hooks/useLocations";
 import { useFilteredListings } from "../hooks/useFilteredListings";
-import { QueryClient, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 
 
 const SearchModal = () => {
