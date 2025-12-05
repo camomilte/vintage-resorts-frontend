@@ -6,7 +6,6 @@ export interface ListingResponse {
   data: Listing
 };
 
-
 export interface Listing {
   listing_id: number;
   host_id: number;

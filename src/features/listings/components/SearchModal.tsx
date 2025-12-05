@@ -6,10 +6,14 @@ import { FaClockRotateLeft, FaKitchenSet, FaLocationDot } from "react-icons/fa6"
 import { useEras } from "../hooks/useEras";
 import { useAmenities } from "../hooks/useAmenities";
 import { useLocations } from "../hooks/useLocations";
+import { useFilteredListings } from "../hooks/useFilteredListings";
+import { QueryClient, useQueryClient } from "@tanstack/react-query";
 
 
 const SearchModal = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
 
   // Boolean state to hold if modal is open or closed
   const [modalOpen, setModalOpen] = useState(false);
@@ -27,9 +31,8 @@ const SearchModal = () => {
   // Get eras from backend
   const { data: eras } = useEras();
 
-  console.log("amenities:", selectedAmenities);
-  console.log("eras:", selectedEras)
-  console.log("locations:", selectedLocations)
+  // Get Filter logic
+  const { mutate } = useFilteredListings();
 
   // Deduplicate locations data
   const uniqueLocation = Array.from(
@@ -41,6 +44,24 @@ const SearchModal = () => {
       prev.includes(value) ? prev.filter(item => item !== value) : [...prev, value]
     );
   };
+
+  const handleSearch = () => {
+    const selectedFilters = {
+      locations: selectedLocations,
+      amenities: selectedAmenities,
+      eras: selectedEras,
+    }
+
+    mutate(selectedFilters, {
+      onSuccess: (data) => {
+        // Store fetched listings in cache
+        queryClient.setQueryData(["filteredListings"], data)
+        navigate("/search");
+        setModalOpen(false)
+      }
+    })
+  };
+
 
 
   return (
@@ -84,13 +105,12 @@ const SearchModal = () => {
           <h2 className="text-brand text-3xl font-title font-semibold capitalize pb-4">amenities</h2>
     
           {amenities?.map(a => (
-            <div className="flex items-center justify-between my-3">
+            <div key={a.amenity_id} className="flex items-center justify-between my-3">
               <div className="flex gap-2 items-center">
                 <div className="bg-brand/20 p-3 rounded-lg w-fit">
                   <FaKitchenSet className="size-6"/>
                 </div>
-                <label key={a.amenity_id} htmlFor={a.amenity_name}>{a.amenity_name}</label>
-
+                <label htmlFor={a.amenity_name}>{a.amenity_name}</label>
               </div>
               <input
                 type="checkbox"
@@ -105,12 +125,12 @@ const SearchModal = () => {
         <section aria-label="amenities filter section" className="bg-br-background rounded-2xl p-4 my-4">
           <h2 className="text-brand text-3xl font-title font-semibold capitalize pb-4">Era</h2>
           {eras?.map(era => (
-            <div className="flex items-center justify-between my-3">
+            <div key={era.amenity_id} className="flex items-center justify-between my-3">
               <div className="flex gap-2 items-center">
                 <div className="bg-brand/20 p-3 rounded-lg w-fit">
                   <FaClockRotateLeft className="size-6"/>
                 </div>
-              <label key={era.amenity_id} htmlFor={era.amenity_name}>{era.amenity_name}</label>
+              <label htmlFor={era.amenity_name}>{era.amenity_name}</label>
             </div>
               <input
                 type="checkbox"
@@ -122,10 +142,12 @@ const SearchModal = () => {
           ))}
         </section>
 
-        <button className="btn-primary btn-lg w-full mb-5">
+        <button 
+          onClick={handleSearch}
+          className="btn-primary btn-lg w-full mb-5"
+        >
           Search
         </button>
-
       </Modal>
 
     </>

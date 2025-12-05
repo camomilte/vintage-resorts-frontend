@@ -9,6 +9,7 @@ import Login from "../pages/LoginPage";
 import NotFound from "../pages/NotFoundPage";
 import Register from "../pages/RegisterPage";
 import Reservation from "../pages/ReservationPage";
+import Search from "../pages/SearchPage";
 
 
 export const router = createBrowserRouter([
@@ -17,6 +18,7 @@ export const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <Home /> },
+      { path: "search", element: <Search /> }
     ]
   },
   {
