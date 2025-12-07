@@ -13,7 +13,7 @@ function ListingDetail() {
   const { listing_id } = useParams<{ listing_id: string }>();
   const listingId = Number(listing_id);
   const { data: listing, isLoading, isError, error } = useListing(listingId);
-  const { data: amenities } = useListinAmenities(listingId);
+  const { data: amenities, isLoading: amenitiesLoading, isError: amenitiesError } = useListinAmenities(listingId);
 
   const ref = useRef<HTMLParagraphElement>(null)
   const [isOpen, setIsOpen] = useState(false);
@@ -41,6 +41,9 @@ function ListingDetail() {
   if (isError) return <span>Error: {error.message}</span>;
   if (!listing) return null;
 
+  // TODO: move amenities fetch to another component or render conditionally to not make entire page crash
+  if (amenitiesLoading) return <p>Loading...</p>;
+  if (amenitiesError) return <p>Error</p>;
 
 
   return (

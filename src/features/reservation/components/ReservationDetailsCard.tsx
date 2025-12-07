@@ -3,6 +3,7 @@ import placeholder from '../../../assets/stock-apartment.jpg'
 import { useLocation, useNavigate } from "react-router";
 import { calculateTotalPrice } from "../../../utils/calculateTotalPrice";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { DateModal, GuestsModal, type GuestsCounters } from "../../listings/components/SelectionModals";
 
 interface Props {
   listing_id: string;
@@ -19,14 +20,58 @@ export const ReservationDetailsCard = ({ listing_id, onChange }: Props) => {
   // Initialize navigate
   const navigate = useNavigate();
 
-  // Get checkIn and checkOut date and convert to Date objects
+
+
+ /*  // Get checkIn and checkOut date and convert to Date objects
   const checkIn = state?.checkIn ? new Date(state.checkIn) : undefined;
   const checkOut = state?.checkOut ? new Date(state.checkOut) : undefined;
   // Extract guests from state 
   const numAdults = state?.guests?.adults.value ?? 0;
   const numChildren = state?.guests?.children.value ?? 0;
   const numInfants = state?.guests?.infants.value ?? 0;
-  const numPets = state?.guests?.pets.value ?? 0;
+  const numPets = state?.guests?.pets.value ?? 0; */
+
+
+  // Local editable state initialized from location state
+  const [checkIn, setCheckIn] = useState<Date | undefined>(state?.checkIn ? new Date(state.checkIn) : undefined);
+  const [checkOut, setCheckOut] = useState<Date | undefined>(state?.checkOut ? new Date(state.checkOut) : undefined);
+
+  const [checkInModalOpen, setCheckInModalOpen] = useState(false);
+  const [checkOutModalOpen, setCheckOutModalOpen] = useState(false);
+  const [guestsModalOpen, setGuestsModalOpen] = useState(false);
+
+  const [guestsCounters, setGuestsCounters] = useState<GuestsCounters>({
+    adults: { value: state?.guests?.adults.value ?? 0, description: "18 and older" },
+    children: { value: state?.guests?.children.value ?? 0, description: "2-17 years old" },
+    infants: { value: state?.guests?.infants.value ?? 0, description: "Younger than 2 years old" },
+    pets: { value: state?.guests?.pets.value ?? 0, description: "Excluding service animals" }
+  });
+
+   const handleIncrement = (key: keyof GuestsCounters) => {
+    setGuestsCounters(prev => ({ 
+      ...prev, 
+      [key]: {
+        ...prev[key],
+        value: prev[key].value + 1,
+      }
+    }));
+  }
+
+  const handleDecrement = (key: keyof GuestsCounters) => {
+    setGuestsCounters(prev => ({ 
+      ...prev, 
+      [key]: {
+        ...prev[key],
+        value: Math.max(prev[key].value - 1,0),
+      } 
+    }));
+  }
+
+  // Extract guests values for display/compute
+  const numAdults = guestsCounters.adults.value;
+  const numChildren = guestsCounters.children.value;
+  const numInfants = guestsCounters.infants.value;
+  const numPets = guestsCounters.pets.value;
   
   // Call function to calculate total price
   const totalPrice = checkIn && checkOut ? calculateTotalPrice(checkIn, checkOut, listing?.price_per_night) : 0;
@@ -82,6 +127,7 @@ export const ReservationDetailsCard = ({ listing_id, onChange }: Props) => {
         <div className="tracking-tight">
           <h2 className="font-bold">{listing?.title}</h2>
           <p className="text-neutral-500">{listing?.num_bedrooms} bedrooms, {listing?.num_bathrooms} bathrooms</p>
+          <p className="text-neutral-500">{listing?.price_per_night} SEK per night</p>
         </div>
       </div>
 
@@ -90,7 +136,7 @@ export const ReservationDetailsCard = ({ listing_id, onChange }: Props) => {
           <h3 className="uppercase font-bold">Check in</h3>
           <p className="text-neutral-500">{checkIn ? checkIn.toLocaleDateString() : "Not selected"}</p>
         </div>
-        <button className="btn-primary btn-xs">{checkIn? "Change" : "Select"}</button>
+        <button className="btn-primary btn-xs" onClick={() => setCheckInModalOpen(true)}>{checkIn? "Change" : "Select"}</button>
       </div>
 
       <div className="flex justify-between items-center py-4 border-b border-zinc-800">
@@ -98,7 +144,7 @@ export const ReservationDetailsCard = ({ listing_id, onChange }: Props) => {
           <h3 className="uppercase font-bold">Check out</h3>
           <p className="text-neutral-500">{checkOut ? checkOut.toLocaleDateString() : "Not selected"}</p>
         </div>
-        <button className="btn-primary btn-xs">{checkOut? "Change" : "Select"}</button>
+        <button className="btn-primary btn-xs" onClick={() => setCheckOutModalOpen(true)}>{checkOut? "Change" : "Select"}</button>
       </div>
 
       <div className="flex justify-between items-center py-4 border-b border-zinc-800">
@@ -114,10 +160,10 @@ export const ReservationDetailsCard = ({ listing_id, onChange }: Props) => {
             <p className="text-neutral-500">{numInfants} infants</p>
           )}
           {numPets > 0 && (
-            <p className="text-neutral-500">{numPets.value} pets</p>
+            <p className="text-neutral-500">{numPets} pets</p>
           )}
         </div>
-        <button className="btn-primary btn-xs">{numAdults? "Change" : "Select"}</button>
+        <button className="btn-primary btn-xs" onClick={() => setGuestsModalOpen(true)}>{numAdults? "Change" : "Select"}</button>
 
       </div>
 
@@ -128,6 +174,37 @@ export const ReservationDetailsCard = ({ listing_id, onChange }: Props) => {
         </div>
         <button className="btn-primary btn-xs">Details</button>
       </div>
+
+      {/* Reused modals */}
+      <DateModal
+        open={checkInModalOpen}
+        onClose={() => setCheckInModalOpen(false)}
+        title="Select Check-in Date"
+        selected={checkIn}
+        onSelect={(d) => {
+          setCheckIn(d);
+          setCheckInModalOpen(false);
+        }}
+      />
+
+      <DateModal
+        open={checkOutModalOpen}
+        onClose={() => setCheckOutModalOpen(false)}
+        title="Select Check-out Date"
+        selected={checkOut}
+        onSelect={(d) => {
+          setCheckOut(d);
+          setCheckOutModalOpen(false);
+        }}
+      />
+
+      <GuestsModal
+        open={guestsModalOpen}
+        onClose={() => setGuestsModalOpen(false)}
+        guests={guestsCounters}
+        onIncrement={handleIncrement}
+        onDecrement={handleDecrement}
+      />
     </div>
   )
 }

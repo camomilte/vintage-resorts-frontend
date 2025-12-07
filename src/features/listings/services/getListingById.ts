@@ -13,4 +13,4 @@ export const getListingById = async (listing_id: number): Promise<Listing> => {
 export const getListingAmenities = async (listing_id: number): Promise<Amenity[]> => {
   const res = await api.get<AmentiesResponse>(`/listings/${listing_id}/amenities`);
   return res.data.data;
-}
+};

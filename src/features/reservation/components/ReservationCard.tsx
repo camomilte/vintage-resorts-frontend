@@ -1,8 +1,6 @@
 import { useState } from "react"
-import { Modal } from "../../../components/Modal";
-import { DayPicker } from "react-day-picker";
-import { FaMinus, FaPlus } from "react-icons/fa6";
 import { useNavigate } from "react-router";
+import { DateModal, GuestsModal, type GuestsCounters } from "../../listings/components/SelectionModals";
 
 //TODO: Check so start day cannot be before today and end day cannot be before start day
 
@@ -21,14 +19,14 @@ export const BookingCard = () => {
 
   const [guestsModalOpen, setGuestsModalOpen] = useState(false);
 
-  const [guestsCounters, setGuestsCounters] = useState({
+  const [guestsCounters, setGuestsCounters] = useState<GuestsCounters>({
     adults: { value: 1, description: "18 and older" },
     children: { value: 0, description: "2-17 years old" },
     infants: { value: 0, description: "Younger than 2 years old" },
     pets: { value: 0, description: "Excluding service animals" }
   });
 
-  const handleIncrement = (key: keyof typeof guestsCounters) => {
+  const handleIncrement = (key: keyof GuestsCounters) => {
     setGuestsCounters(prev => ({ 
       ...prev, 
       [key]: {
@@ -38,7 +36,7 @@ export const BookingCard = () => {
     }));
   }
 
-  const handleDecrement = (key: keyof typeof guestsCounters) => {
+  const handleDecrement = (key: keyof GuestsCounters) => {
     setGuestsCounters(prev => ({ 
       ...prev, 
       [key]: {
@@ -64,22 +62,13 @@ export const BookingCard = () => {
         </button>
 
         {/* Check in modal */}
-        <Modal open={checkInModalOpen} onClose={() => setCheckInModalOpen(false)}>
-          <h3 className="text-3xl font-title font-semibold text-brand">Select Check-in Date</h3>
-
-          <div className="flex justify-center">
-            <DayPicker
-              animate
-              mode="single"
-              navLayout="around"
-              selected={checkIn}
-              onSelect={setCheckIn}
-              footer={
-                checkIn ? `Selected: ${checkIn.toLocaleDateString()}` : "Pick a day."
-              }
-            />
-          </div>
-        </Modal>
+        <DateModal
+          open={checkInModalOpen}
+          onClose={() => setCheckInModalOpen(false)}
+          title="Select Check-in Date"
+          selected={checkIn}
+          onSelect={setCheckIn}
+        />
 
         {/* Check out button */}
         <button 
@@ -90,22 +79,13 @@ export const BookingCard = () => {
         </button>
 
         {/* Check out modal */}
-        <Modal open={checkOutModalOpen} onClose={() => setCheckOutModalOpen(false)}>
-          <h3 className="text-3xl font-title font-semibold text-brand">Select Check-out Date</h3>
-
-          <div className="flex justify-center">
-            <DayPicker
-              animate
-              mode="single"
-              navLayout="around"
-              selected={checkOut}
-              onSelect={setCheckOut}
-              footer={
-                checkOut ? `Selected: ${checkOut.toLocaleDateString()}` : "Pick a day."
-              }
-            />
-          </div>
-        </Modal>
+        <DateModal
+          open={checkOutModalOpen}
+          onClose={() => setCheckOutModalOpen(false)}
+          title="Select Check-out Date"
+          selected={checkOut}
+          onSelect={setCheckOut}
+        />
         
         {/* Guests button */}
         <button 
@@ -116,50 +96,13 @@ export const BookingCard = () => {
         </button>
 
         {/* Guests modal */}
-        <Modal open={guestsModalOpen} onClose={() => setGuestsModalOpen(false)}>
-          <h3 className="text-3xl font-title font-semibold text-brand">Select Guests</h3>
-
-          <form className="py-4">
-            {Object.keys(guestsCounters).map(key => {
-              const counter = guestsCounters[key as keyof typeof guestsCounters]
-              return (
-                <div key={key} className="flex justify-between items-center py-4">
-                  <div>
-                    <label htmlFor={key} className="font-bold capitalize">{key}</label>
-                    <p className="text-neutral-500">{counter.description}</p>
-
-                  </div>
-                  <div className="flex items-center py-2">
-                    <button
-                      type="button"
-                      onClick={() => handleDecrement(key as keyof typeof guestsCounters)}
-                      className="icon-sm size-8! btn-secondary"
-                    >
-                      <FaMinus />
-                    </button>
-
-                    <input 
-                      id={key}
-                      type="number"
-                      readOnly
-                      value={counter.value}
-                      className="text-center max-w-14" 
-                    />
-
-                    <button
-                      type="button"
-                      onClick={() => handleIncrement(key as keyof typeof guestsCounters)}
-                      className="icon-sm size-8! btn-secondary"
-                    >
-                      <FaPlus />
-                    </button>
-                  </div>
-                </div>
-              )
-                
-            })}
-          </form>
-        </Modal>
+        <GuestsModal
+          open={guestsModalOpen}
+          onClose={() => setGuestsModalOpen(false)}
+          guests={guestsCounters}
+          onIncrement={handleIncrement}
+          onDecrement={handleDecrement}
+        />
 
         <button 
           className="btn-light-primary btn-md w-full"
