@@ -26,7 +26,7 @@ function Reservation() {
   };
 
   return (
-    <div className="px-4">
+    <div className="px-4 max-w-xl mx-auto">
       <div className="pt-4 flex justify-between lg:hidden">
         <a href={`/listings/${listing_id}`} className="icon-sm btn-secondary bg-br-background!"><FaArrowLeft className="size-full"/></a>     
       </div> 

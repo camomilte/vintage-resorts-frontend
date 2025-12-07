@@ -10,6 +10,7 @@ import NotFound from "../pages/NotFoundPage";
 import Register from "../pages/RegisterPage";
 import Reservation from "../pages/ReservationPage";
 import Search from "../pages/SearchPage";
+import ProtectedRoute from "../features/authentication/components/ProtectedRoute";
 
 
 export const router = createBrowserRouter([
@@ -32,7 +33,7 @@ export const router = createBrowserRouter([
     element: <DetailLayout />,
     children: [
       { path: "listings/:listing_id", element: <ListingDetail /> },
-      { path: "/listings/:listing_id/reservations/new", element: <Reservation />}
+      { path: "/listings/:listing_id/reservations/new", element: <ProtectedRoute><Reservation /></ProtectedRoute>}
     ]
   },
   {
