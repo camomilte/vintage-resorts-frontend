@@ -11,6 +11,7 @@ import Register from "../pages/RegisterPage";
 import Reservation from "../pages/ReservationPage";
 import Search from "../pages/SearchPage";
 import ProtectedRoute from "../features/authentication/components/ProtectedRoute";
+import BookedPage from "../pages/BookedPage";
 
 
 export const router = createBrowserRouter([
@@ -33,7 +34,8 @@ export const router = createBrowserRouter([
     element: <DetailLayout />,
     children: [
       { path: "listings/:listing_id", element: <ListingDetail /> },
-      { path: "/listings/:listing_id/reservations/new", element: <ProtectedRoute><Reservation /></ProtectedRoute>}
+      { path: "/listings/:listing_id/reservations/new", element: <ProtectedRoute><Reservation /></ProtectedRoute>},
+      { path: "/listings/:listing_id/reservations/booked", element: <ProtectedRoute><BookedPage /></ProtectedRoute>}
     ]
   },
   {

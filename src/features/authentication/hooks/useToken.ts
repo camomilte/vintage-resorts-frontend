@@ -4,11 +4,15 @@ import { useEffect, useState } from "react"
 export const useToken = () => {
   // State that holds token
   const [token, setToken] = useState<string | null>(null);
+  // Loadingstate
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // useEffect that runs once component mounts
   useEffect(() => {
     // Read and set token from localStorage
     setToken(localStorage.getItem("token"));
+    // Set loading to false
+    setIsLoading(false);
   }, []);
 
   // Listen for changes to token in other tabs
@@ -28,5 +32,5 @@ export const useToken = () => {
   const isAuthenticated = !!token;
 
   // Return token and logged in status
-  return { token, isAuthenticated }
+  return { token, isAuthenticated, isLoading }
 }

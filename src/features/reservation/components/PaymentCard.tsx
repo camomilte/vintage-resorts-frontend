@@ -1,9 +1,13 @@
 import { FaCcMastercard, FaCcPaypal, FaGooglePay } from "react-icons/fa6"
 import { SiKlarna } from "react-icons/si"
 import SwishLogo from "../../../assets/swish-icon.svg"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-export const PaymentCard = () => {
+interface Props {
+  onChange: any;
+}
+
+export const PaymentCard = ({ onChange }: Props) => {
   // State to hold selected payment method with Debit as default value
   const [selectedPayment, setSelectedPayment] = useState<string>("Debit");
 
@@ -11,6 +15,10 @@ export const PaymentCard = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedPayment(e.target.id)
   };
+
+  useEffect(() => {
+    onChange(selectedPayment);
+  }, [selectedPayment]);
 
   return (
     <div className="border border-zinc-800 rounded-2xl px-4 py-6">

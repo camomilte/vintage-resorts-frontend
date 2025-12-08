@@ -20,18 +20,6 @@ export const ReservationDetailsCard = ({ listing_id, onChange }: Props) => {
   // Initialize navigate
   const navigate = useNavigate();
 
-
-
- /*  // Get checkIn and checkOut date and convert to Date objects
-  const checkIn = state?.checkIn ? new Date(state.checkIn) : undefined;
-  const checkOut = state?.checkOut ? new Date(state.checkOut) : undefined;
-  // Extract guests from state 
-  const numAdults = state?.guests?.adults.value ?? 0;
-  const numChildren = state?.guests?.children.value ?? 0;
-  const numInfants = state?.guests?.infants.value ?? 0;
-  const numPets = state?.guests?.pets.value ?? 0; */
-
-
   // Local editable state initialized from location state
   const [checkIn, setCheckIn] = useState<Date | undefined>(state?.checkIn ? new Date(state.checkIn) : undefined);
   const [checkOut, setCheckOut] = useState<Date | undefined>(state?.checkOut ? new Date(state.checkOut) : undefined);
